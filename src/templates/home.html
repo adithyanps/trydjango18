@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block head_title %} welcome | {{ block.super }}{% endblock %}
+
+<style>
+{% block style %}
+
+{% endblock %}
+</style>
+
+  
+
+
+
+
+
+{% block jumbotron %}
+
+<div class="jumbotron"> 
+	<div class="row">
+		<div class="col-sm-6">
+		<h1>Try Django 1.8</h1>
+		<p>The MVP landing project is designed to ge tyour project started. The goal is to help you launch as soon as possible with the leaat amount of investment using time or money.Join us today.</p>
+		<p>
+		<a class="btn btn-lg btn-primary" href="" role="button">Join Us &raquo;</a>
+		</p>
+		</div>
+		<div class="col-sm-6" style="background-color:black;height: 300px;">
+		</div>
+	
+	</div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+
+    <div class="col-sm-3 pull-right">
+			<p class="lead text-align-class">{{ title }} </p>
+			 
+			<form method = "POST" action="">{% csrf_token %}
+			{{ form|crispy }}
+
+			<input class='btn btn-primary 'type="submit" value="Sign Up" />
+
+			</form>
+	</div>
+<div class="col-sm-3">
+<p class='lead text-align-class'>Built with Django &amp; Bootstrap</p>
+</div>
+<div class="col-sm-3">
+<p class='lead text-align-class'>Created for startets of all kinds.</p>
+</div>
+<div class="col-sm-3">
+<p class='lead text-align-class'>Always Open Source.</p>
+</div>
+
+	
+</div>
+
+
+			{% endblock %}
