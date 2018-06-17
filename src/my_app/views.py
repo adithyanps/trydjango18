@@ -67,5 +67,5 @@ def contact(request):
 	return render(request, "forms.html",context)
 
 def about(request):
-	return(request,'about.html',{})
+	return render(request,'about.html',{})
 
