@@ -15,7 +15,7 @@
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
-            <li class="dropdown">
+            <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Action</a></li>
@@ -26,13 +26,27 @@
                 <li><a href="#">Separated link</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'registration_register' %}">Register</a></li>
+            {% endif %}
           </ul>
+          {% if not request.user.is_authenticated and not "accounts/login" in request.get_full_path %}
+            <form class='navbar-form navbar-right' method='POST' action="{% url 'auth_login' %}">{% csrf_token %}
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="username" />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="password" />
+              </div>
+              <button type="submit" class="btn btn-default">Login</button>
+            </form>
+            {% endif %}
+
         </div><!--/.nav-collapse -->
       </div>
     </nav> 

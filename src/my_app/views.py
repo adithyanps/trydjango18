@@ -5,12 +5,13 @@ from django.core.mail import send_mail
 from django.shortcuts import render
 from .forms import ContactForm
 from .forms import SignUpForm
+from .models import SignUp 
 
 
 
 # Create your views here.
 def home(request):
-	title = "welcome"
+	title = "SignUp Now"
 	form = SignUpForm(request.POST or None)
 
 	context = { "title":title,"form": form	}
@@ -28,6 +29,16 @@ def home(request):
 		#	instance.full_name = "justin"
 		instance.save()
 		context = {"title":"thank you"}
+
+	if request.user.is_authenticated() and request.user.is_staff:
+		# print(SignUp.objects.all())
+		# i = 1
+		# for instance in SignUp.objects.all():
+		# 	print(i)
+		# 	print(instance)
+		# 	i += 1
+		queryset = SignUp.objects.all().order_by('-timestamp')
+		context = {"queryset":queryset}
 	return render(request,'home.html',context)
 
 def contact(request):
@@ -67,5 +78,5 @@ def contact(request):
 	return render(request, "forms.html",context)
 
 def about(request):
-	return(request,'about.html',{})
+	return render(request,'about.html',{})
 
