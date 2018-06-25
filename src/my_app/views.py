@@ -3,9 +3,12 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
 from .forms import ContactForm
 from .forms import SignUpForm
+from .forms import AddForm
 from .models import SignUp 
+from .models import Add
 
 
 
@@ -79,4 +82,40 @@ def contact(request):
 
 def about(request):
 	return render(request,'about.html',{})
+
+def marksheet(request):
+	form=Add.objects.all()
+	# print(Add.objects.all())
+	#if request.user.is_authenticated():
+	# print(request)
+	
+	context={"form":form}
+
+	return render(request,"marksheet.html",context)
+def add(request):
+	message = "welcome"
+ 	form = AddForm(request.POST or None)
+ 	context = { "message":message,"form":form }
+ 	if form.is_valid():
+ 		instance = form.save(commit=False)
+ 		form.cleaned_data["userid"] = request.user.id 
+ 		if instance.name:
+ 			instance.userid = request.user.id
+ 			instance.save()
+ 			context = {"message":"thankyou"}
+
+ 	return render(request,'add.html',context)
+
+
+def delete(request,pk):
+	query = Add.objects.get(id=pk)
+	query1 = query.userid
+	try:
+		if int(request.user.id) == int(query1):
+			Add.objects.filter(id=pk).delete()
+		context = {"title":"OOPS! ENTRY DELETED"}
+	except:
+		context={"title":"cannot delete"}
+	return render(request,'delete.html',context)
+
 
