@@ -129,7 +129,7 @@ def tweets(request):
 	context = { "message":message,"form":form }
 	if form.is_valid():
 		instance = form.save(commit=False)
-		username = form.cleaned_data["full_name"] 
+		username = form.cleaned_data["full_name"]
 		Consumer_Key='afcB58TdOAfsBgaiTzdYbzvPL'
 		Consumer_Secret='I0CAM68ikunSSd99cX8X5r6CaZEC08GNKEzp1EkCjI6kc2xArS'
 		Access_Token ='1011198782065635329-tqi6WW2GIn0u9m1qevJ7o0TZaGikaw'
@@ -140,9 +140,12 @@ def tweets(request):
 		r=requests.get(url,auth=auth)
 		dic=r.json()
 		instance.save()
-		#print dic
+		#print dict
 		value=[]
 		for item in dic:
 			value.append(item["full_text"])
+
 			context = { "value":value }
-		return render(request,'tweet/tweets.html',context)
+
+
+	return render(request,'tweet/tweets.html',context)
