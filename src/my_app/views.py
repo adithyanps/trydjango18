@@ -139,13 +139,14 @@ def tweets(request):
 		auth = OAuth1(Consumer_Key,Consumer_Secret,Access_Token, Access_Token_Secret)
 		r=requests.get(url,auth=auth)
 		dic=r.json()
-		instance.save()
+		
 		#print dict
 		value=[]
 		for item in dic:
 			value.append(item["full_text"])
-
-			context = { "value":value }
+		instance.save()
+		context = { "value":value }
+			
 
 
 	return render(request,'tweet/tweets.html',context)
