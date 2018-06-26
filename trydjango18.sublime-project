@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/user/django/trydjango"
+		},
+		{
+			"path": "/home/user/my_site"
+		},
+		{
+			"path": "src"
+		},
+		{
+			"path": "static_in_env"
+		}
+	]
+}
