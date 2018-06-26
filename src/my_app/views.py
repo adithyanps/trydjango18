@@ -7,10 +7,14 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import ContactForm
 from .forms import SignUpForm
 from .forms import AddForm
+from .forms import TweetForm
 from .models import SignUp 
 from .models import Add
+from .models import Tweet
 
-
+import requests
+import json 
+from requests_oauthlib import OAuth1
 
 # Create your views here.
 def home(request):
@@ -119,3 +123,31 @@ def delete(request,pk):
 	return render(request,'delete.html',context)
 
 
+def tweets(request):
+	message = "Get-Tweets"
+	form = TweetForm(request.POST or None)
+	context = { "message":message,"form":form }
+	if form.is_valid():
+		instance = form.save(commit=False)
+		username = form.cleaned_data["full_name"] 
+		# username = request.POST.get('fullname')
+
+		Consumer_Key='afcB58TdOAfsBgaiTzdYbzvPL'
+		Consumer_Secret='I0CAM68ikunSSd99cX8X5r6CaZEC08GNKEzp1EkCjI6kc2xArS'
+		Access_Token ='1011198782065635329-tqi6WW2GIn0u9m1qevJ7o0TZaGikaw'
+		Access_Token_Secret ='Q2BeZZEhH57jzBIATOwjHmzUr3cTvjTdcyFSTXH8mmqvW'
+		# username=raw_input("enter the username:")
+		url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="+username+"&tweet_mode=extended"
+		auth = OAuth1(Consumer_Key,Consumer_Secret,Access_Token, Access_Token_Secret)
+		r=requests.get(url,auth=auth)
+		dic=r.json()
+		instance.save()
+		#print dict
+		value=[]
+		for item in dic:
+			value.append(item["full_text"])
+
+			context = { "value":value }
+
+
+	return render(request,'tweet/tweets.html',context)

@@ -19,4 +19,7 @@ class Add(models.Model):
 	def __unicode__(self):
 		return self.name
 		
-
+class Tweet(models.Model):
+	full_name = models.CharField(max_length=120)
+	def __unicode__(self):
+	 	return self.full_name
