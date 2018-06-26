@@ -12,7 +12,11 @@
 {% endblock %}
 </style>
 
+<<<<<<< HEAD
+
+=======
  
+>>>>>>> e6f6a6e70163a3bde1cca754afc79d22accac13a
 
 
 
@@ -22,12 +26,17 @@
  {% if not request.user.is_authenticated %}
 
 <div class="jumbotron">
-  	<div class="container"> 
+  	<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
 			<h1>Try Django 1.8</h1>
+<<<<<<< HEAD
+			<p>The MVP landing project is designed to get your project started. The goal is to help you launch as soon as possible with the least amount of investment using time or money.Join us today.</p>
+			<p>
+=======
 			<p>The MVP landing project is designed to ge tyour project started. The goal is to help you launch as soon as possible with the least amount of investment using time or money.Join us today.</p>
 			<!-- <p>
+>>>>>>> e6f6a6e70163a3bde1cca754afc79d22accac13a
 			<a class="btn btn-lg btn-primary" href="" role="button">Join Us &raquo;</a>
 			</p> -->
 			</div>
@@ -36,7 +45,7 @@
 				</div>
 				<!-- <iframe width="550" height="330" src="https://www.youtube.com/embed/4OlGpS2LG_M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 			</div>
-	
+
 		</div>
  	 </div>
 </div>
@@ -64,7 +73,7 @@
 
     <div class="col-sm-3 pull-right">
 			<p class="lead text-align-class">{{ title }} </p>
-			 
+
 			<form method = "POST" action="">{% csrf_token %}
 			{{ form|crispy }}
 
@@ -82,7 +91,7 @@
 <p class='lead text-align-class'>Always Open Source.</p>
 </div>
 
-	
+
 </div>
 {% endif %}
 

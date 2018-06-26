@@ -25,7 +25,7 @@ SECRET_KEY = '13gb^7^+myqw7_r@@=@-1^#i*e4iv(+93xg2cfco+g^x+xs4(t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['adithayanps3.pythonanywhere.com']
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "yourgmail@gmail.com"
