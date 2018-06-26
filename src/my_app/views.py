@@ -3,11 +3,18 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
 from .forms import ContactForm
 from .forms import SignUpForm
+from .forms import AddForm
+from .forms import TweetForm
 from .models import SignUp 
+from .models import Add
+from .models import Tweet
 
-
+import requests
+import json 
+from requests_oauthlib import OAuth1
 
 # Create your views here.
 def home(request):
@@ -80,3 +87,62 @@ def contact(request):
 def about(request):
 	return render(request,'about.html',{})
 
+def marksheet(request):
+	form=Add.objects.all()
+	# print(Add.objects.all())
+	#if request.user.is_authenticated():
+	# print(request)
+	
+	context={"form":form}
+
+	return render(request,"marksheet.html",context)
+def add(request):
+	message = "welcome"
+ 	form = AddForm(request.POST or None)
+ 	context = { "message":message,"form":form }
+ 	if form.is_valid():
+ 		instance = form.save(commit=False)
+ 		form.cleaned_data["userid"] = request.user.id 
+ 		if instance.name:
+ 			instance.userid = request.user.id
+ 			instance.save()
+ 			context = {"message":"thankyou"}
+
+ 	return render(request,'add.html',context)
+
+
+def delete(request,pk):
+	query = Add.objects.get(id=pk)
+	query1 = query.userid
+	try:
+		if int(request.user.id) == int(query1):
+			Add.objects.filter(id=pk).delete()
+		context = {"title":"OOPS! ENTRY DELETED"}
+	except:
+		context={"title":"cannot delete"}
+	return render(request,'delete.html',context)
+
+
+def tweets(request):
+	message = "Get-Tweets"
+	form = TweetForm(request.POST or None)
+	context = { "message":message,"form":form }
+	if form.is_valid():
+		instance = form.save(commit=False)
+		username = form.cleaned_data["full_name"] 
+		Consumer_Key='afcB58TdOAfsBgaiTzdYbzvPL'
+		Consumer_Secret='I0CAM68ikunSSd99cX8X5r6CaZEC08GNKEzp1EkCjI6kc2xArS'
+		Access_Token ='1011198782065635329-tqi6WW2GIn0u9m1qevJ7o0TZaGikaw'
+		Access_Token_Secret ='Q2BeZZEhH57jzBIATOwjHmzUr3cTvjTdcyFSTXH8mmqvW'
+		# username=raw_input("enter the username:")
+		url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="+username+"&tweet_mode=extended&count=100"
+		auth = OAuth1(Consumer_Key,Consumer_Secret,Access_Token, Access_Token_Secret)
+		r=requests.get(url,auth=auth)
+		dic=r.json()
+		instance.save()
+		#print dic
+		value=[]
+		for item in dic:
+			value.append(item["full_text"])
+			context = { "value":value }
+		return render(request,'tweet/tweets.html',context)

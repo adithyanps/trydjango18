@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method='POST' actions='tweets/'>{% csrf_token %}
+  	<h1>{{message}}</h1>
+   {{ form.as_p }}
+   <button class="btn btn-lg btn-primary " type="submit">SUBMIT</button>
+   
+  </form>
+  
+  <ol>
+  	{% for item in value %}
+  	<li> {{item}} </li>
+  	{% endfor %}
+  </ol>
+
+ {% endblock %}
+
+

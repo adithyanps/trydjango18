@@ -9,6 +9,10 @@ urlpatterns = [
 	
 	url(r'^contact/$',views.contact,name='contact'),
 	url(r'^about/$',views.about,name='about'),
+	url(r'^marksheet/$',views.marksheet,name='marksheet'),
+	url(r'^add/$',views.add,name='add'),
+	url(r'^delete/(?P<pk>\d+)/$', views.delete, name='delete'),
+	url(r'^tweets/$',views.tweets,name='tweets'),
 	# url(r'^accounts/',include('registration.backends.default.urls')),
 
 

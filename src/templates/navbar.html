@@ -1,4 +1,5 @@
- <!-- Static navbar -->
+{% load staticfiles %}
+<!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -10,11 +11,18 @@
           </button>
           <a class="navbar-brand" href="/">NVP landing</a>
         </div>
+
+
+
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'marksheet' %}">marksheet</a></li>
+            <li><a href="{% url 'tweets' %}">tweets</a></li>
+
+
             <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -35,6 +43,23 @@
             <li><a href="{% url 'registration_register' %}">Register</a></li>
             {% endif %}
           </ul>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+
+          {% if request.user.is_authenticated and "marksheet/" in request.get_full_path %}
+            <li><a href="{% url 'add' %}">add</a></li>
+            {% endif %}
+          </ul>
+           <ul class="nav navbar-nav navbar-left">
+
+          {% if request.user.is_authenticated and "add/" in request.get_full_path %}
+            
+            {% endif %}
+          </ul>
+
+          
+
+   
           {% if not request.user.is_authenticated and not "accounts/login" in request.get_full_path %}
             <form class='navbar-form navbar-right' method='POST' action="{% url 'auth_login' %}">{% csrf_token %}
               <div class="form-group">

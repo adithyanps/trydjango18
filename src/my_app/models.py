@@ -11,3 +11,15 @@ class SignUp(models.Model):
 	updated = models.DateTimeField(auto_now_add =False,auto_now=True)
 	def __unicode__(self):
 		return self.email
+
+class Add(models.Model):
+	name = models.CharField(max_length=120)
+	marks = models.CharField(max_length=120)
+	userid =  models.CharField(max_length=120,blank=False)
+	def __unicode__(self):
+		return self.name
+		
+class Tweet(models.Model):
+	full_name = models.CharField(max_length=120)
+	def __unicode__(self):
+	 	return self.full_name

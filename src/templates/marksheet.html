@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>marksheet</h1>
+{% if not request.user.is_authenticated %}
+<table class="table">
+  <tr><td>Si.No</td><td>name</td><td>mark</td></tr>
+  {% for instance in form %}
+  <tr><td>{{forloop.counter}}</td><td>{{instance.name}}</td><td>{{instance.marks}}</td></tr>
+    {% endfor %}
+</table>
+<p>please login for add marks</p>
+{% else %}
+<table class = table>
+  <tr><td>Si.No</td><td>name</td><td>mark</td><td>delete</td></tr>
+  {% for instance in form %}
+  <tr><td>{{forloop.counter}}</td><td>{{instance.name}}</td><td>{{instance.marks}}</td><td><a class="btn btn-lg btn-primary" href="{% url 'delete' pk=instance.id %}" role="button">DELETE &raquo;</a></td></tr>
+
+</tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
+
+
+
+
+     

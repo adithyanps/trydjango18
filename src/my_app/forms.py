@@ -1,5 +1,28 @@
 from django import forms
 from .models import SignUp
+from .models import Add
+from .models import Tweet
+
+class TweetForm(forms.ModelForm):
+	class Meta:
+		model = Tweet
+		fields = ["full_name"]
+	def clean_full_name(self):
+		full_name = self.cleaned_data.get("full_name")
+		return full_name
+
+class AddForm(forms.ModelForm):
+	class Meta:
+		model = Add
+		fields = ["name","marks"]
+	def clean_name(self):
+		name = self.cleaned_data.get("name")
+		return name
+	def clean_marks(self):
+		marks = self.cleaned_data.get("marks")
+		return marks
+	
+		
 
 class ContactForm(forms.Form):
 	full_name = forms.CharField(required=False)
