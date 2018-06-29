@@ -15,7 +15,7 @@
   <form method='POST' actions='marksheet/'>{% csrf_token %}
   	<h1>{{message}}</h1>
    {{ form.as_p }}
-   <button class="btn btn-lg btn-primary " type="submit">SUBMIT</button>
+   <input class="btn btn-info" align="center" type="submit" value ="Submit">
   </form>
 
 {%endif%}

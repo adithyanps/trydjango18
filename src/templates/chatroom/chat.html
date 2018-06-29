@@ -1,21 +1,15 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-<title>{% block head_title %} TWITTER-Tweets{% endblock %}</title>
-
+<title>{% block head_title %} CHATROOM{% endblock %}</title>
 {% block content %}
+
+<p class='lead text-align-class'>WELLCOME TO CHATROOM</p>
 <form method='POST' actions='tweets/'>{% csrf_token %}
-  	<h1>{{message}}</h1>
    {{ form.as_p }}
+   
    <input class="btn btn-info" align="center" type="submit" value ="Submit">
    
   </form>
-  
-  <ol>
-  	{% for item in value %}
-  	<li> {{item}} </li>
-  	{% endfor %}
-  </ol>
+  {{ message }}
 
- {% endblock %}
-
-
+{% endblock %}

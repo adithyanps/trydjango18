@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<title>{% block head_title %} RSS-READER {% endblock %}</title>
+{% block content %}
+{%if user.is_authenticated %}
+<p class='lead text-align-class'>WELLCOME TO RSS-READER</p>
+<form method="POST">{% csrf_token %}
+	 <!-- {{ message }} -->
+	 {{form.as_p}}
+	 <button type="submit">Submit</button>
+</form>
+{{ title}}
+ <ol>
+    {%for i in data%}	
+     <li>{{i}}</li>
+    {%endfor%}
+</ol>
+{% else %}
+ <p>please login for access rss-reader</p>
+{% endif %}
+
+{% endblock %}

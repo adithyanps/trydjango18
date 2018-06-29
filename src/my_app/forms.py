@@ -2,6 +2,33 @@ from django import forms
 from .models import SignUp
 from .models import Add
 from .models import Tweet
+from .models import Convert
+from .models import Reader
+from .models import Chat
+
+class ChatForm(forms.ModelForm):
+	class Meta:
+		model = Chat
+		fields = ["message"]
+
+class ReaderForm(forms.ModelForm):
+	class Meta:
+		model = Reader
+		fields = ["url"]
+
+class ConvertForm(forms.ModelForm):
+	class Meta:
+		model = Convert
+		fields = ["convert_from","convert_to","amount"]
+	def clean_convert_from(self):
+		convert_from = self.cleaned_data.get("convert_from")
+		return convert_from
+	def clean_convert_to(self):
+		convert_to = self.cleaned_data.get("convert_to")
+		return convert_to
+	def clean_amount(self):
+		amount = self.cleaned_data.get("amount")
+		return amount
 
 class TweetForm(forms.ModelForm):
 	class Meta:

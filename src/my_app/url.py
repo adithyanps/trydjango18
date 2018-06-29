@@ -13,6 +13,11 @@ urlpatterns = [
 	url(r'^add/$',views.add,name='add'),
 	url(r'^delete/(?P<pk>\d+)/$', views.delete, name='delete'),
 	url(r'^tweets/$',views.tweets,name='tweets'),
+	url(r'^currency_converter/$',views.currency_converter,name='currency_converter'),
+	url(r'^rss_reader/$',views.rss_reader,name='rss_reader'),
+	url(r'^chatroom/$',views.chatroom,name='chatroom'),
+
+
 	# url(r'^accounts/',include('registration.backends.default.urls')),
 
 

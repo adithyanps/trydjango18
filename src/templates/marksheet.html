@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+<title>{% block head_title %} MARKSHEET {% endblock %}</title>
 
 {% block content %}
 
@@ -16,7 +17,7 @@
 <table class = table>
   <tr><td>Si.No</td><td>name</td><td>mark</td><td>delete</td></tr>
   {% for instance in form %}
-  <tr><td>{{forloop.counter}}</td><td>{{instance.name}}</td><td>{{instance.marks}}</td><td><a class="btn btn-lg btn-primary" href="{% url 'delete' pk=instance.id %}" role="button">DELETE &raquo;</a></td></tr>
+  <tr><td>{{forloop.counter}}</td><td>{{instance.name}}</td><td>{{instance.marks}}</td><td><a class="btn btn-info" align="center" href="{% url 'delete' pk=instance.id %}" role="button">DELETE &raquo;</a></td></tr>
 
 </tr>
   {% endfor %}
@@ -24,7 +25,3 @@
 {% endif %}
 {% endblock %}
 
-
-
-
-     
