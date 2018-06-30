@@ -158,7 +158,7 @@ def tweets(request):
 	return render(request,'tweet/tweets.html',context)
 
 def currency_converter(request):
-	message = "WELCOME TO CURRENCY-CONVERTER"
+	message = "WELLCOME TO CURRENCY-CONVERTER"
 	form = ConvertForm(request.POST or None)
 	context = { "message":message,"form":form }
 	if form.is_valid():
