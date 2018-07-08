@@ -50,7 +50,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'registration',
     #my_apps
-    'my_app',
+    # 'my_app',
+    'my_app2',
+
+
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,"templates")],
+        # 'DIRS': [os.path.join(BASE_DIR,"template")],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

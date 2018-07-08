@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% include 'nvbr.html' %}
+{% block jumbotron %}
+ {% if not request.user.is_authenticated %}
+
+<div class="jumbotron">
+  	<div class="container"> 
+		<div class="row">
+			<div class="col-sm-6">
+			<h1>Job finder</h1>
+			<p>JOBS FOR YOU..!!!
+			find your jobs</p>
+			<p>
+			<a class="btn btn-lg btn-primary" href="accounts/login/" role="button">Join Us &raquo;</a>
+			</p> 
+			</div>
+			<div class="col-sm-6" > 
+				<div class="col-sm-6" style="background-color:black;height: 300px;width: 450px;"> 
+				</div> 
+				<!-- <iframe width="550" height="330" src="https://www.youtube.com/embed/4OlGpS2LG_M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> --> 
+			</div>
+	
+		</div>
+ 	 </div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+{% if request.user.is_authenticated %}
+ 
+  <p> You are logged in</p>
+  <p2>hai {{ request.user }}...</p2>
+
+	  
+
+<!--  
+<div class="row">
+
+    <div class="col-sm-3 pull-right">
+			<p class="lead text-align-class">{{ title }} </p>
+			 
+			<form method = "POST" action="">{% csrf_token %}
+			{{ form|crispy }}
+
+			<input class='btn btn-primary 'type="submit" value="Sign Up" />
+
+			</form>
+	</div>
+
+
+	
+</div> -->
+
+
+<!-- <form method='POST' actions='search/'>{% csrf_token %}
+  	
+   {{ form.as_p }}
+   <input class="btn btn-info" align="center" type="box" value ="Submit">
+   
+  </form> -->
+
+{% endif %}
+
+			{% endblock %}

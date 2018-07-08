@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<title>{% block head_title %} listedJobs {% endblock %}</title>
+
+{% block content %}
+<form method='POST' actions='jobs/'>{% csrf_token %}
+
+   {{ form.as_p }}
+   <input class="btn btn-info" align="center" type="submit" value ="search"> 
+   
+  </form>
+  {% endblock %}

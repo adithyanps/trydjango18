@@ -22,6 +22,8 @@ urlpatterns = [
 
 
 	url(r'^admin/', admin.site.urls),
-    url(r'',include ('my_app.url')),
+    # url(r'',include ('my_app.url')),
+    url(r'',include ('my_app2.url')),
+
     url(r'^accounts/',include('registration.backends.simple.urls')),
 ]

@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'registration',
     #my_apps
-    'my_app',
+    # 'my_app',
+    'my_app2',
 ]
 
 MIDDLEWARE = [

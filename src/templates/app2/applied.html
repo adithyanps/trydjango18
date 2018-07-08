@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<title>{% block head_title %} AppliedJobs {% endblock %}</title>
+
+{% block content %}
+hi {{request.user}}<h>  find jobs and click apply</h>
+
+{% for job in applied_jobs %}
+  <div class="container" >
+  	<div class="panel panel-default">
+  		<div class="panel-title" align="center">{{ job.job_title }}</div>
+  		<div class="panel-body">
+  		<div >{{job.job_id}}</div>
+  		<div>{{ job.company_name}}</div>  
+   		<a class="btn btn-info" align="center" href="{% url 'delete' pk=job.id %}" role="button">Cancel &raquo;</a></div>
+   	</div>
+   </div>
+ {% endfor %}
+
+{% endblock %}

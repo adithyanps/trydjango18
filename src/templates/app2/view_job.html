@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<title>{% block head_title %} Joblist {% endblock %}</title>
+
+{% block content %}
+ {% if queryset %}
+ {% for job in queryset %}
+  <div class="container" >
+  	<div class="panel panel-default">
+  		<div class="panel-title" align="center">{{ job.job_title }}</div>
+  		<div class="panel-body">
+  		<div >{{job.job_id}}</div>
+  		<div>{{ job.company_name}}</div>  
+  		{% if applied_jobs %}
+  		{% if job in applied_jobs %}
+  		<a class="btn btn-info" align="right"  role="button">APPLIED &raquo;</a>
+  		<a class="btn btn-info" align="right" href="{% url 'delete' pk=job.id %}" role="button">Cancel &raquo;</a></div>
+  		{% else %}
+  		<a class="btn btn-info" align="right" href="{% url 'apply' pk=job.id %}" role="button">APPLY &raquo;</a>
+  
+  		 	{% endif %}
+  		 	{%else%}
+  		 	<a class="btn btn-info" align="right" href="{% url 'apply' pk=job.id %}" role="button">APPLY &raquo;</a>
+  		
+  		 	{% endif %}
+  		</div>
+  	</div>
+  </div> 
+
+  {% endfor %}
+  {% endif %}
+ 
+  {% endblock %}}
+ 
